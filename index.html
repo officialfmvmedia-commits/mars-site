@@ -1,0 +1,82 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>$MARS — The first coin minted from Mars</title><meta name="description" content="$MARS: a coin whose mint key is seeded from a real NASA HiRISE image of Mars.">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png"><link rel="icon" href="favicon.ico"><link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png"><meta property="og:image" content="img/og.png"><meta property="og:title" content="$MARS — The first coin minted from Mars"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="img/og.png">
+<link rel="stylesheet" href="style.css"><style>.mintcard{margin-top:.8em;word-break:break-all}.ca b,.pk{word-break:break-all;text-transform:none!important;letter-spacing:.02em}.copy{margin-left:.8em;padding:.35em .9em;background:transparent;color:inherit;border:1px solid currentColor;border-radius:4px;cursor:pointer;font:inherit}</style></head><body>
+<canvas id="dust" aria-hidden="true"></canvas><div class="grain" aria-hidden="true"></div><div class="vig" aria-hidden="true"></div><div class="flare" aria-hidden="true"></div><div class="puff" aria-hidden="true"></div>
+<nav class="nav"><a href="#top" class="brand">$MARS</a><div><a href="#story">Story</a><a href="#derive">Derivation</a><a href="#verify">Verify</a><a href="#token">Token</a></div></nav>
+
+<header id="top" class="hero">
+  <div class="layer sky" data-speed="0.05"></div>
+  <div class="layer sun" data-speed="0.1"></div>
+  <img class="layer ph far" data-speed="0.3" src="img/hero-far.webp" alt="" fetchpriority="high">
+  <div class="layer haze h1" data-speed="0.32"></div>
+  <img class="layer ph mid" data-speed="0.16" src="img/hero-mid.webp" alt="Gale crater toward Mount Sharp, photographed by NASA's Curiosity rover">
+  <div class="layer haze h2" data-speed="0.18"></div>
+  <img class="layer ph fg" data-speed="0.04" src="img/hero-fg.webp" alt="">
+  <div class="layer grade"></div>
+  <div class="hero-txt" data-speed="-0.25">
+    <p class="mono kicker">SOL 0 · ARRIVAL · 6.47°S 283.15°E</p>
+    <h1>$MARS</h1>
+    <p class="sub">The first coin minted from Mars.</p>
+    <a class="cta" href="#story">Descend <span class="arr">↓</span></a>
+  </div>
+</header>
+
+<section id="story" class="story">
+  <div class="wrap two">
+    <div><p class="mono kicker">01 — LIGHT FROM ANOTHER WORLD</p>
+    <h2>Sunlight hit the surface of Mars. It bounced up, crossed space, and landed on a camera in orbit.</h2>
+    <p>On August 15, 2026, NASA's Mars Reconnaissance Orbiter pointed its HiRISE camera at the layered terrain near 6.5°S and captured it in color. That image is public. Anyone on Earth can download it, byte for byte.</p>
+    <p>$MARS is the first coin whose mint key is seeded from that light. Not a mascot. Not a metaphor. A real photograph of another planet, hashed and folded into the keypair that creates the token.</p></div>
+    <div class="details"><figure><img src="img/detail0.jpg" alt="HiRISE detail crop of Martian layered terrain" loading="lazy"><figcaption class="mono">DETAIL A · ESP_094000_1735</figcaption></figure>
+    <figure><img src="img/detail1.jpg" alt="HiRISE detail crop" loading="lazy"><figcaption class="mono">DETAIL B</figcaption></figure>
+    <figure><img src="img/detail2.jpg" alt="HiRISE detail crop" loading="lazy"><figcaption class="mono">DETAIL C</figcaption></figure></div>
+  </div>
+</section>
+
+<section class="flyover" id="flyover">
+  <div class="sticky">
+    <div class="track"><img id="strip" src="img/strip.jpg" alt="HiRISE RGB strip ESP_094000_1735 (unprojected), layered terrain on Mars"></div>
+    <div class="hud mono">
+      <div class="tl">MRO / HiRISE<br><b>ESP_094000_1735_COLOR</b></div>
+      <div class="tr">UTC 2026-08-15 21:09:17<br>Ls 336.41°</div>
+      <div class="bl">LAT −6.36° → −6.58°<br>LON 283.13°E – 283.17°E</div>
+      <div class="br">ORBITAL PASS <span id="pct">0</span>%</div>
+      <div class="reticle"></div>
+    </div>
+  </div>
+</section>
+
+<section id="derive" class="derive">
+  <div class="wrap"><p class="mono kicker">02 — THE DERIVATION</p><h2>From photons to a keypair.</h2>
+  <ol class="steps">
+    <li><span class="n mono">I</span><h3>The image</h3><p>ESP_094000_1735_COLOR.JP2, 113&nbsp;MB, straight from the NASA PDS archive.</p></li>
+    <li><span class="n mono">II</span><h3>SHA-256</h3><p class="hash mono" id="hash">…</p></li>
+    <li><span class="n mono">III</span><h3>+ Private entropy</h3><p>32 random bytes generated locally, never transmitted. Only their hash is published up front. Mixed with the Mars hash through <span class="mono">HKDF-SHA256</span>, labeled with the image ID and capture time.</p></li>
+    <li><span class="n mono">IV</span><h3>ed25519 keypair</h3><p>The 32-byte seed becomes a Solana keypair, exactly as solana-keygen does it.</p>
+      <div class="mintcard mono small"><span class="tag">MINT ADDRESS</span><br>pubkey <span class="pk">FtHz3vdrcUqfs7YC3oscsPE34Hf2hTGcYqPtEyq2qycy</span><br>entropy commitment sha256 <span class="pk">2267aad3ecc5dfa36f5c8d135b0e908f0418645d7b81c40cdfe92896ce82aaed</span><br>info ESP_094000_1735_COLOR2026-08-15T21:09:17.752 · salt MARS-MINT-v1</div></li>
+  </ol></div>
+</section>
+
+<section id="verify" class="verify"><div class="wrap two">
+  <div><p class="mono kicker">03 — VERIFY IT YOURSELF</p><h2>Don't trust. Download Mars.</h2>
+  <p>Fetch the official file from NASA's Planetary Data System and hash it. You'll get the same 64 characters we did.</p>
+  <a class="btn" href="https://hirise-pds.lpl.arizona.edu/PDS/RDR/ESP/ORB_094000_094099/ESP_094000_1735/ESP_094000_1735_COLOR.JP2" rel="noopener">Official PDS file ↗</a>
+  <pre class="mono code">$ sha256sum ESP_094000_1735_COLOR.JP2
+436965b5e00b41f89fde63437d6bb13a
+1a983f23c76ab21da8f7a3a6bf0d69b3</pre></div>
+  <div class="cr"><h3>Commit, then reveal</h3>
+  <p><b>Before launch:</b> we publish the hash of our private entropy. That locks it in; it can't be swapped later.</p>
+  <p><b>Mint:</b> the Mars hash + entropy derive the mint key. Mint authority is renounced.</p>
+  <p><b>After:</b> we reveal the entropy. Anyone can rerun HKDF and land on the exact contract address.</p>
+  <p class="dim">Why it's safe: without the 256 secret bits, the public Mars hash reveals nothing about the key. Guessing would take 2<sup>256</sup> tries.</p></div>
+</div></section>
+
+<section id="token" class="token"><div class="wrap center">
+  <p class="mono kicker">04 — THE TOKEN</p><h2 class="big">$MARS</h2>
+  <div class="ca mono"><span>CONTRACT</span><b id="ca">FtHz3vdrcUqfs7YC3oscsPE34Hf2hTGcYqPtEyq2qycy</b><button class="copy" onclick="navigator.clipboard.writeText('FtHz3vdrcUqfs7YC3oscsPE34Hf2hTGcYqPtEyq2qycy');this.textContent='Copied'">Copy</button></div>
+  <div class="btns"><a class="btn dis" aria-disabled="true">pump.fun · soon</a><a class="btn dis" aria-disabled="true">X · soon</a></div>
+</div></section>
+
+<footer class="foot mono"><p>Imagery: NASA/JPL/University of Arizona · HiRISE ESP_094000_1735</p><p>Surface panoramas: NASA/JPL-Caltech/MSSS · Curiosity Mastcam PIA19803, PIA16769</p><p class="dim">$MARS is a memecoin with no intrinsic value or expectation of return. Not affiliated with NASA, JPL or the University of Arizona.</p></footer>
+<script src="main.js"></script></body></html>
