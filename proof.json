@@ -1,0 +1,16 @@
+{
+ "pubkey": "FtHz3vdrcUqfs7YC3oscsPE34Hf2hTGcYqPtEyq2qycy",
+ "entropy_commitment_sha256": "2267aad3ecc5dfa36f5c8d135b0e908f0418645d7b81c40cdfe92896ce82aaed",
+ "mars_hash_sha256": "436965b5e00b41f89fde63437d6bb13a1a983f23c76ab21da8f7a3a6bf0d69b3",
+ "mars_source": "HiRISE ESP_094000_1735_COLOR.JP2",
+ "salt": "MARS-MINT-v1",
+ "info": "ESP_094000_1735_COLOR2026-08-15T21:09:17.752",
+ "timestamp": "2026-08-15T21:09:17.752Z",
+ "derivation": "seed=HKDF-SHA256(ikm=entropy||mars_hash,salt,info,L=32); Ed25519 fromSeed",
+ "entropy_revealed": "6dfb47bea576a3b87020b64a82540d24502245bc34b1b45e7d28025223ea06c2",
+ "onchain": {
+  "program": "Token-2022",
+  "mintAuthority": null,
+  "freezeAuthority": null
+ }
+}
